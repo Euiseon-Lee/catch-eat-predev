@@ -1,4 +1,4 @@
-package com.ge.predevcatcheat.config;
+package com.catcheat.predev.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

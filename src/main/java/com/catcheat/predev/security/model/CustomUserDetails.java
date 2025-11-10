@@ -1,6 +1,6 @@
-package com.ge.predevcatcheat.security.model;
+package com.catcheat.predev.security.model;
 
-import com.ge.predevcatcheat.entity.User;
+import com.catcheat.predev.security.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

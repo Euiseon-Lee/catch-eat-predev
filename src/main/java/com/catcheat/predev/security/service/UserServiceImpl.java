@@ -1,8 +1,10 @@
-package com.ge.predevcatcheat.service;
+package com.catcheat.predev.security.service;
 
-import com.ge.predevcatcheat.entity.User;
-import com.ge.predevcatcheat.repository.UserRepository;
+import com.catcheat.predev.security.entity.User;
+import com.catcheat.predev.security.repository.UserRepository;
 import jakarta.transaction.Transactional;
+
+import java.util.Optional;
 
 public class UserServiceImpl implements IUserService {
     /** Service란?
@@ -19,7 +21,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Transactional
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 }

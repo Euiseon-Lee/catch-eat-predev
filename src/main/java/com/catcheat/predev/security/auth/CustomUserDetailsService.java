@@ -3,6 +3,7 @@ package com.catcheat.predev.security.auth;
 import com.catcheat.predev.security.entity.User;
 import com.catcheat.predev.security.repository.UserRepository;
 import com.catcheat.predev.security.model.CustomUserDetails;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +13,9 @@ import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    /** CustomOAuth2UserService의 역할
-     *  일반 로그인(이메일+비밀번호) 처리를 담당하는 서비스
+    /** CustomUserDetailsService의 역할
+     *  폼 로그인(이메일/비밀번호)에서 사용자 정보를 로드하는 핵심 서비스
+     *  UserRepository를 통해 이메일 기준으로 User 엔티티 조회
      *  Spring Security에서 인증(Authentication) 처리의 핵심 역할 수행.
      *  UserDetailsService를 구현해서 사용자 정보를 로드하고, 인증 객체로 변환하는 역할을 수행.
      */

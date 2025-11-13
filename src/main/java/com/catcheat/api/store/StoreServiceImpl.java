@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,11 +18,19 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public StoreResponseDto create(StoreRequestDto requestDto) {
-        Store store = new Store();
-        store.setCode(requestDto.getCode());
-        store.setName(requestDto.getName());
-        store.setAddress(requestDto.getAddress());
-        store.setOpened(requestDto.isOpened());
+        Store store = Store.builder()
+                .code(requestDto.getCode())
+                .name(requestDto.getName())
+                .address(requestDto.getAddress())
+                .opened(requestDto.isOpened())
+                .province(requestDto.getProvince())
+                .city(requestDto.getCity())
+                .district(requestDto.getDistrict())
+                .roadAddress(requestDto.getRoadAddress())
+                .lotAddress(requestDto.getLotAddress())
+                .latitude(requestDto.getLatitude())
+                .longitude(requestDto.getLongitude())
+                .build();
 
         Store saved = storeRepository.save(store);
         return StoreResponseDto.from(saved);
@@ -40,7 +49,7 @@ public class StoreServiceImpl implements StoreService {
     public List<StoreResponseDto> getAll() {
         return storeRepository.findAll().stream()
                 .map(StoreResponseDto::from)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,8 +61,18 @@ public class StoreServiceImpl implements StoreService {
         store.setName(requestDto.getName());
         store.setAddress(requestDto.getAddress());
         store.setOpened(requestDto.isOpened());
+        store.setProvince(requestDto.getProvince());
+        store.setCity(requestDto.getCity());
+        store.setDistrict(requestDto.getDistrict());
+        store.setRoadAddress(requestDto.getRoadAddress());
+        store.setLotAddress(requestDto.getLotAddress());
+        store.setLatitude(requestDto.getLatitude());
+        store.setLongitude(requestDto.getLongitude());
 
-        return StoreResponseDto.from(store);
+        // JPA 영속 상태라 save() 없이도 flush 시점에 업데이트 되지만,
+        // 명시적으로 반환값 받고 싶으면 save 호출
+        Store updated = storeRepository.save(store);
+        return StoreResponseDto.from(updated);
     }
 
     @Override

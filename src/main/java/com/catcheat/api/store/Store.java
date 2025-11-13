@@ -24,9 +24,16 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String code;       // 매장 코드 (예: CE000001)
-    private String name;       // 매장명
-    private String address;    // 주소
-    private boolean opened;    // 영업 중 여부
+    private String code;        // 매장 코드 (예: CE000001)
+    private String name;        // 매장명
+    private String address;     // 주소
+    private boolean opened;     // 영업 중 여부
 
+    private String province;    // 도/광역시/특별시
+    private String city;        // 시/구/군
+    private String district;    // 동/읍/면
+    private String roadAddress; // 도로명 주소
+    private String lotAddress;  // 지번 주소 (필요하면)
+    private Double latitude;    // 위도 (lat, Y)
+    private Double longitude;   // 경도 (lng, X)
 }
